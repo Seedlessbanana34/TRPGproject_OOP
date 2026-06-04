@@ -26,7 +26,7 @@ class DiceRoller:
         return min(random.randint(1, sides), random.randint(1, sides))
 
 
-# ITEM HIERARCHY
+# ITEMS
 class Item(ABC):
     """Abstract base class for items"""
 
