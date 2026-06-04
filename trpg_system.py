@@ -1,7 +1,5 @@
-"""
-TRPG (Tabletop Role-Playing Game) OOP System
-Demonstrates: Abstraction, Encapsulation, Inheritance, Polymorphism
-"""
+#TRPG OOP System
+
 
 import random
 from abc import ABC, abstractmethod
@@ -21,18 +19,16 @@ class DiceRoller:
 
     @staticmethod
     def advantage_roll(sides: int) -> int:
-        """Roll twice, take higher (D&D advantage mechanic)."""
         return max(random.randint(1, sides), random.randint(1, sides))
 
     @staticmethod
     def disadvantage_roll(sides: int) -> int:
-        """Roll twice, take lower."""
         return min(random.randint(1, sides), random.randint(1, sides))
 
 
 # ITEM HIERARCHY
 class Item(ABC):
-    """Abstract base class for game items"""
+    """Abstract base class for items"""
 
     def __init__(self, name: str, weight: float, value: int):
         self._name = name
@@ -106,7 +102,7 @@ class Potion(Item):
         return f"{target.name} drinks {self._name} and recovers {self._heal_amount} HP!"
 
 
-# SKILL HIERARCHY
+# SKILLS
 class Skill(ABC):
     def __init__(self, name: str, mp_cost: int, description: str):
         self._name = name
@@ -169,7 +165,7 @@ class BuffSkill(Skill):
                 f"{target.name}'s {self._stat} +{self._amount} for this battle.")
 
 
-# CHARACTER HIERARCHY
+# CHARACTERS
 class Character(ABC):
     """Abstract base class for all characters."""
 
@@ -254,7 +250,6 @@ class Character(ABC):
     def learn_skill(self, skill: Skill):
         self._skills.append(skill)
 
-    # Abstract
     @abstractmethod
     def class_bonus(self) -> str:
         """Each subclass provides a unique passive description."""
@@ -333,7 +328,7 @@ class Rogue(Character):
         return "Shadow Step — 20% chance to dodge incoming attacks"
 
 
-# ENEMY
+# ENEMYS
 class Enemy(Character):
     def __init__(self, name: str, max_hp: int, strength: int,
                  agility: int, intelligence: int, reward_xp: int):
@@ -403,7 +398,6 @@ class BattleSystem:
         return self._log
 
 
-# DEMO
 def run_demo():
     random.seed(42)
     print("\n" + "="*45)
